@@ -1,34 +1,9 @@
-function [theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters)
-%GRADIENTDESCENT Performs gradient descent to learn theta
-%   theta = GRADIENTDESCENT(X, y, theta, alpha, num_iters) updates theta by 
-%   taking num_iters gradient steps with learning rate alpha
+function J = computeCostMulti(X, y, theta)
+% J = COMPUTECOSTMULTI(X, y, theta) computes the cost of using theta as the
+% parameter for linear regression to fit the data points in X and y
 
-% Initialize some useful values
-m = length(y); % number of training examples
-J_history = zeros(num_iters, 1);
+m = length(y);
 
-
-for iter = 1:num_iters
-
-    % ====================== YOUR CODE HERE ======================
-    % Instructions: Perform a single gradient step on the parameter vector
-    %               theta. 
-    %
-    % Hint: While debugging, it can be useful to print out the values
-    %       of the cost function (computeCost) and gradient here.
-    %
-    
-    pred = ((X*theta)-y);
-    val1 = (sum(pred.*X(:,1)));
-    val2 = (sum(pred.*X(:,2)));
-    theta1_temp = theta(1) - ((alpha/m) * val1);
-    theta2_temp = theta(2) - ((alpha/m) * val2);
-    theta(1) = theta1_temp
-    theta(2) = theta2_temp
-    J_history(iter) = computeCost(X, y, theta)
-    
-    
-
-end
+J = (1/(2*m)) * (X * theta - y)' * (X * theta - y); 
 
 end
